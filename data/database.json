@@ -1,0 +1,1300 @@
+{
+  "settings": {
+    "dailyTarget": 6000
+  },
+  "users": [
+    {
+      "id": "u1",
+      "username": "StaffniSales",
+      "password": "scrypt:ec79d4fe294f45a230fbbb2c16583fc7:9945ecc98641ef821f5d8713716676be4a13fbe50eddc250bddfa5fd51b47f93380bcfb771610706e31c8ac6a87ade07f32b363500e42ecc46e12a6758b80ae5",
+      "role": "staff"
+    },
+    {
+      "id": "u2",
+      "username": "Brendan",
+      "password": "scrypt:e6c77a0b01a25ea3bc74951d53c2f17e:6c9f597bd3a10ffa591b51177dc993d5005a8c95291d6e8b4d0264ad31c1539d1b84790571ed5136a24365f364b0b95d830e7ff72c1d21f68f43052fdc2a5483",
+      "role": "admin"
+    },
+    {
+      "id": "u3",
+      "username": "Markaaron",
+      "password": "scrypt:7c21a4d792cb40b0b5cf08923b23fe26:5c38e2211fd510f3e71cec1d3110f7775532277a3a772ea6e4da2e4bbbeb0e88917eaa8121c64dedc6bad2569b9a1c7e4b8e5cd7e6a6b62c10b4c5cba5350539",
+      "role": "admin"
+    },
+    {
+      "id": "u4",
+      "username": "Justin",
+      "password": "scrypt:8dedaf1200ba6169c515103c2360dd43:627317ddfe8ab3715fc08921a7a8308a8964119923b371916ed42970c5d2b1f1a3f1291a766aee0d844884100d99798ff21946b67edc0cc6417e055a1d7e2c45",
+      "role": "admin"
+    }
+  ],
+  "menu": [
+    {
+      "id": "m1",
+      "name": "Crispy Pork Kare-Kare",
+      "description": "Slow-simmered roasted peanut-annatto sauce topped with crispy pork belly and sautéed artisanal bagoong.",
+      "category": "Mains",
+      "price": 245,
+      "cost": 120,
+      "image": "./images/kare-kare.jpg",
+      "available": true
+    },
+    {
+      "id": "m2",
+      "name": "Tortang Talong with Tapa Baka & Itlog Maalat Salsa",
+      "description": "Pairs classic smoky eggplant omelet with tender beef tapa and fresh salted-egg salsa.",
+      "category": "Mains",
+      "price": 195,
+      "cost": 95,
+      "image": "./images/tortang-talong-tapa.jpg",
+      "available": true
+    },
+    {
+      "id": "m3",
+      "name": "Glazed Pork Belly Adobo with Garlic Confit",
+      "description": "Twice-cooked soy-vinegar pork belly finished with caramelized roasted garlic confit and soft-boiled egg.",
+      "category": "Mains",
+      "price": 185,
+      "cost": 88,
+      "image": "./images/adobo.jpg",
+      "available": true
+    },
+    {
+      "id": "m4",
+      "name": "Beef Short Rib Kaldereta with Smoked Cheese",
+      "description": "Fork-tender beef simmered in rich tomato-liver stew topped with melted smoked cheese and olives.",
+      "category": "Mains",
+      "price": 255,
+      "cost": 130,
+      "image": "./images/kaldereta.jpg",
+      "available": true
+    },
+    {
+      "id": "m5",
+      "name": "Crispy Pork Binagoongan with Green Mango Salsa",
+      "description": "Crunchy pork belly tossed in sweet-savory shrimp paste glaze, balanced with tangy green mango salsa.",
+      "category": "Mains",
+      "price": 210,
+      "cost": 100,
+      "image": "./images/binagoongan.jpg",
+      "available": true
+    },
+    {
+      "id": "m6",
+      "name": "Braised Beef Pares with Bone Marrow Glaze",
+      "description": "Star-anise braised beef brisket over garlic fried rice drizzled with rich bone marrow glaze and house chili oil.",
+      "category": "Soups & Bowls",
+      "price": 215,
+      "cost": 105,
+      "image": "./images/pares.jpg",
+      "available": true
+    },
+    {
+      "id": "m7",
+      "name": "Meatball Soup in Creamy Wild Mushroom Broth",
+      "description": "Savory home-style pork and beef meatballs simmered in velvety mushroom soup broth with toasted garlic.",
+      "category": "Soups & Bowls",
+      "price": 175,
+      "cost": 82,
+      "image": "./images/meatball-mushroom-soup.jpg",
+      "available": true
+    },
+    {
+      "id": "m8",
+      "name": "Beef Ribs Sinigang sa Sampalok & Watermelon",
+      "description": "Tender beef ribs in tangy tamarind broth elevated with sweet roasted watermelon and crisp local greens.",
+      "category": "Soups & Bowls",
+      "price": 240,
+      "cost": 122,
+      "image": "./images/sinigang.jpg",
+      "available": true
+    },
+    {
+      "id": "m9",
+      "name": "Batangas Bone Marrow Bulalo",
+      "description": "Slow-boiled beef shank with rich marrow, sweet corn, and pechay in clear peppercorn broth.",
+      "category": "Soups & Bowls",
+      "price": 295,
+      "cost": 155,
+      "image": "./images/bulalo.jpg",
+      "available": true
+    },
+    {
+      "id": "m10",
+      "name": "Special Crispy Chicharon Goto",
+      "description": "Ginger-infused toasted rice porridge topped with crispy chicharon bulaklak, soft-boiled egg, and fried shallots.",
+      "category": "Soups & Bowls",
+      "price": 155,
+      "cost": 68,
+      "image": "./images/goto.jpg",
+      "available": true
+    },
+    {
+      "id": "m11",
+      "name": "Crispy Beef Lumpiang Shanghai",
+      "description": "Hand-rolled spiced ground beef spring rolls served with house sweet-chili calamansi glaze.",
+      "category": "Snacks & Desserts",
+      "price": 165,
+      "cost": 75,
+      "image": "./images/lumpiang-shanghai-beef.jpg",
+      "available": true
+    },
+    {
+      "id": "m12",
+      "name": "Tinapa & Kesong Puti Croquettes",
+      "description": "Golden crisp bites of flaky smoked fish and creamy local white cheese with roasted garlic aioli.",
+      "category": "Snacks & Desserts",
+      "price": 150,
+      "cost": 65,
+      "image": "./images/tinapa-croquettes.jpg",
+      "available": true
+    },
+    {
+      "id": "m13",
+      "name": "Chocnut Halo-Halo with Salted Caramel",
+      "description": "Fine milky shaved ice layered with sweet beans, ube halaya, crushed Chocnut, and warm salted caramel drizzle.",
+      "category": "Snacks & Desserts",
+      "price": 145,
+      "cost": 60,
+      "image": "./images/chocnut-halohalo.jpg",
+      "available": true
+    },
+    {
+      "id": "m14",
+      "name": "Batangas Tablea Tsokolate Iced Latte",
+      "description": "Rich roasted Batangas cacao tablea whisked with chilled milk and a smooth espresso shot.",
+      "category": "Drinks",
+      "price": 115,
+      "cost": 42,
+      "image": "./images/tablea-latte.jpg",
+      "available": true
+    },
+    {
+      "id": "m15",
+      "name": "Honey Calamansi Pandan Cooler",
+      "description": "Freshly squeezed calamansi steeped with fragrant pandan leaves and wild honey.",
+      "category": "Drinks",
+      "price": 85,
+      "cost": 28,
+      "image": "./images/calamansi-pandan.jpg",
+      "available": true
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-1001",
+      "customerName": "Maria Clara Santos",
+      "orderType": "Dine-In",
+      "tableNumber": "3",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m1",
+          "name": "Crispy Pork Kare-Kare",
+          "category": "Mains",
+          "qty": 2,
+          "price": 245,
+          "cost": 120
+        },
+        {
+          "itemId": "m15",
+          "name": "Honey Calamansi Pandan Cooler",
+          "category": "Drinks",
+          "qty": 2,
+          "price": 85,
+          "cost": 28
+        }
+      ],
+      "total": 660,
+      "totalCost": 296,
+      "browseDurationSec": 142,
+      "status": "Completed",
+      "rating": 5,
+      "createdAt": "2026-11-17T11:25:00+08:00"
+    },
+    {
+      "id": "ORD-1002",
+      "customerName": "Rafael Mendoza",
+      "orderType": "Take-Out",
+      "tableNumber": "",
+      "source": "Walk-In POS",
+      "recordedBy": "StaffniSales",
+      "items": [
+        {
+          "itemId": "m6",
+          "name": "Braised Beef Pares with Bone Marrow Glaze",
+          "category": "Soups & Bowls",
+          "qty": 2,
+          "price": 215,
+          "cost": 105
+        },
+        {
+          "itemId": "m11",
+          "name": "Crispy Beef Lumpiang Shanghai",
+          "category": "Snacks & Desserts",
+          "qty": 1,
+          "price": 165,
+          "cost": 75
+        }
+      ],
+      "total": 595,
+      "totalCost": 285,
+      "browseDurationSec": null,
+      "status": "Completed",
+      "rating": 5,
+      "createdAt": "2026-11-17T12:15:00+08:00"
+    },
+    {
+      "id": "ORD-1003",
+      "customerName": "Bianca Villanueva",
+      "orderType": "Dine-In",
+      "tableNumber": "5",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m9",
+          "name": "Batangas Bone Marrow Bulalo",
+          "category": "Soups & Bowls",
+          "qty": 1,
+          "price": 295,
+          "cost": 155
+        },
+        {
+          "itemId": "m3",
+          "name": "Glazed Pork Belly Adobo with Garlic Confit",
+          "category": "Mains",
+          "qty": 1,
+          "price": 185,
+          "cost": 88
+        },
+        {
+          "itemId": "m14",
+          "name": "Batangas Tablea Tsokolate Iced Latte",
+          "category": "Drinks",
+          "qty": 2,
+          "price": 115,
+          "cost": 42
+        }
+      ],
+      "total": 710,
+      "totalCost": 327,
+      "browseDurationSec": 195,
+      "status": "Completed",
+      "rating": 4,
+      "createdAt": "2026-11-17T18:40:00+08:00"
+    },
+    {
+      "id": "ORD-1004",
+      "customerName": "Paolo Reyes",
+      "orderType": "Take-Out",
+      "tableNumber": "",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m1",
+          "name": "Crispy Pork Kare-Kare",
+          "category": "Mains",
+          "qty": 1,
+          "price": 245,
+          "cost": 120
+        },
+        {
+          "itemId": "m2",
+          "name": "Tortang Talong with Tapa Baka & Itlog Maalat Salsa",
+          "category": "Mains",
+          "qty": 1,
+          "price": 195,
+          "cost": 95
+        },
+        {
+          "itemId": "m13",
+          "name": "Chocnut Halo-Halo with Salted Caramel",
+          "category": "Snacks & Desserts",
+          "qty": 1,
+          "price": 145,
+          "cost": 60
+        }
+      ],
+      "total": 585,
+      "totalCost": 275,
+      "browseDurationSec": 98,
+      "status": "Completed",
+      "rating": 5,
+      "createdAt": "2026-11-18T12:05:00+08:00"
+    },
+    {
+      "id": "ORD-1005",
+      "customerName": "Camille Soriano",
+      "orderType": "Dine-In",
+      "tableNumber": "2",
+      "source": "Walk-In POS",
+      "recordedBy": "Brendan",
+      "items": [
+        {
+          "itemId": "m10",
+          "name": "Special Crispy Chicharon Goto",
+          "category": "Soups & Bowls",
+          "qty": 2,
+          "price": 155,
+          "cost": 68
+        },
+        {
+          "itemId": "m12",
+          "name": "Tinapa & Kesong Puti Croquettes",
+          "category": "Snacks & Desserts",
+          "qty": 1,
+          "price": 150,
+          "cost": 65
+        },
+        {
+          "itemId": "m14",
+          "name": "Batangas Tablea Tsokolate Iced Latte",
+          "category": "Drinks",
+          "qty": 2,
+          "price": 115,
+          "cost": 42
+        }
+      ],
+      "total": 690,
+      "totalCost": 285,
+      "browseDurationSec": null,
+      "status": "Completed",
+      "rating": 5,
+      "createdAt": "2026-11-18T15:30:00+08:00"
+    },
+    {
+      "id": "ORD-1006",
+      "customerName": "Maria Clara Santos",
+      "orderType": "Dine-In",
+      "tableNumber": "1",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m4",
+          "name": "Beef Short Rib Kaldereta with Smoked Cheese",
+          "category": "Mains",
+          "qty": 1,
+          "price": 255,
+          "cost": 130
+        },
+        {
+          "itemId": "m8",
+          "name": "Beef Ribs Sinigang sa Sampalok & Watermelon",
+          "category": "Soups & Bowls",
+          "qty": 1,
+          "price": 240,
+          "cost": 122
+        },
+        {
+          "itemId": "m15",
+          "name": "Honey Calamansi Pandan Cooler",
+          "category": "Drinks",
+          "qty": 2,
+          "price": 85,
+          "cost": 28
+        }
+      ],
+      "total": 665,
+      "totalCost": 308,
+      "browseDurationSec": 118,
+      "status": "Completed",
+      "rating": 5,
+      "createdAt": "2026-11-18T19:10:00+08:00"
+    },
+    {
+      "id": "ORD-1007",
+      "customerName": "Miguel Torres",
+      "orderType": "Take-Out",
+      "tableNumber": "",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m5",
+          "name": "Crispy Pork Binagoongan with Green Mango Salsa",
+          "category": "Mains",
+          "qty": 1,
+          "price": 210,
+          "cost": 100
+        },
+        {
+          "itemId": "m15",
+          "name": "Honey Calamansi Pandan Cooler",
+          "category": "Drinks",
+          "qty": 1,
+          "price": 85,
+          "cost": 28
+        }
+      ],
+      "total": 295,
+      "totalCost": 128,
+      "browseDurationSec": 64,
+      "status": "Cancelled",
+      "rating": null,
+      "createdAt": "2026-11-19T11:48:00+08:00"
+    },
+    {
+      "id": "ORD-1008",
+      "customerName": "Rafael Mendoza",
+      "orderType": "Dine-In",
+      "tableNumber": "4",
+      "source": "Walk-In POS",
+      "recordedBy": "StaffniSales",
+      "items": [
+        {
+          "itemId": "m6",
+          "name": "Braised Beef Pares with Bone Marrow Glaze",
+          "category": "Soups & Bowls",
+          "qty": 2,
+          "price": 215,
+          "cost": 105
+        },
+        {
+          "itemId": "m3",
+          "name": "Glazed Pork Belly Adobo with Garlic Confit",
+          "category": "Mains",
+          "qty": 1,
+          "price": 185,
+          "cost": 88
+        },
+        {
+          "itemId": "m13",
+          "name": "Chocnut Halo-Halo with Salted Caramel",
+          "category": "Snacks & Desserts",
+          "qty": 2,
+          "price": 145,
+          "cost": 60
+        }
+      ],
+      "total": 905,
+      "totalCost": 418,
+      "browseDurationSec": null,
+      "status": "Completed",
+      "rating": 4,
+      "createdAt": "2026-11-19T12:35:00+08:00"
+    },
+    {
+      "id": "ORD-1009",
+      "customerName": "Andrea Lim",
+      "orderType": "Take-Out",
+      "tableNumber": "",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m7",
+          "name": "Meatball Soup in Creamy Wild Mushroom Broth",
+          "category": "Soups & Bowls",
+          "qty": 2,
+          "price": 175,
+          "cost": 82
+        },
+        {
+          "itemId": "m11",
+          "name": "Crispy Beef Lumpiang Shanghai",
+          "category": "Snacks & Desserts",
+          "qty": 2,
+          "price": 165,
+          "cost": 75
+        },
+        {
+          "itemId": "m14",
+          "name": "Batangas Tablea Tsokolate Iced Latte",
+          "category": "Drinks",
+          "qty": 1,
+          "price": 115,
+          "cost": 42
+        }
+      ],
+      "total": 795,
+      "totalCost": 356,
+      "browseDurationSec": 215,
+      "status": "Completed",
+      "rating": 5,
+      "createdAt": "2026-11-19T16:15:00+08:00"
+    },
+    {
+      "id": "ORD-1010",
+      "customerName": "Bianca Villanueva",
+      "orderType": "Dine-In",
+      "tableNumber": "6",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m1",
+          "name": "Crispy Pork Kare-Kare",
+          "category": "Mains",
+          "qty": 2,
+          "price": 245,
+          "cost": 120
+        },
+        {
+          "itemId": "m8",
+          "name": "Beef Ribs Sinigang sa Sampalok & Watermelon",
+          "category": "Soups & Bowls",
+          "qty": 1,
+          "price": 240,
+          "cost": 122
+        },
+        {
+          "itemId": "m13",
+          "name": "Chocnut Halo-Halo with Salted Caramel",
+          "category": "Snacks & Desserts",
+          "qty": 2,
+          "price": 145,
+          "cost": 60
+        }
+      ],
+      "total": 1020,
+      "totalCost": 482,
+      "browseDurationSec": 160,
+      "status": "Completed",
+      "rating": 5,
+      "createdAt": "2026-11-20T12:20:00+08:00"
+    },
+    {
+      "id": "ORD-1011",
+      "customerName": "Carlo Bautista",
+      "orderType": "Take-Out",
+      "tableNumber": "",
+      "source": "Walk-In POS",
+      "recordedBy": "Markaaron",
+      "items": [
+        {
+          "itemId": "m2",
+          "name": "Tortang Talong with Tapa Baka & Itlog Maalat Salsa",
+          "category": "Mains",
+          "qty": 2,
+          "price": 195,
+          "cost": 95
+        },
+        {
+          "itemId": "m12",
+          "name": "Tinapa & Kesong Puti Croquettes",
+          "category": "Snacks & Desserts",
+          "qty": 1,
+          "price": 150,
+          "cost": 65
+        },
+        {
+          "itemId": "m15",
+          "name": "Honey Calamansi Pandan Cooler",
+          "category": "Drinks",
+          "qty": 2,
+          "price": 85,
+          "cost": 28
+        }
+      ],
+      "total": 710,
+      "totalCost": 311,
+      "browseDurationSec": null,
+      "status": "Completed",
+      "rating": 4,
+      "createdAt": "2026-11-20T15:50:00+08:00"
+    },
+    {
+      "id": "ORD-1012",
+      "customerName": "Paolo Reyes",
+      "orderType": "Dine-In",
+      "tableNumber": "2",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m9",
+          "name": "Batangas Bone Marrow Bulalo",
+          "category": "Soups & Bowls",
+          "qty": 2,
+          "price": 295,
+          "cost": 155
+        },
+        {
+          "itemId": "m5",
+          "name": "Crispy Pork Binagoongan with Green Mango Salsa",
+          "category": "Mains",
+          "qty": 1,
+          "price": 210,
+          "cost": 100
+        },
+        {
+          "itemId": "m14",
+          "name": "Batangas Tablea Tsokolate Iced Latte",
+          "category": "Drinks",
+          "qty": 2,
+          "price": 115,
+          "cost": 42
+        }
+      ],
+      "total": 1030,
+      "totalCost": 494,
+      "browseDurationSec": 84,
+      "status": "Completed",
+      "rating": 5,
+      "createdAt": "2026-11-20T19:25:00+08:00"
+    },
+    {
+      "id": "ORD-1013",
+      "customerName": "Maria Clara Santos",
+      "orderType": "Take-Out",
+      "tableNumber": "",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m1",
+          "name": "Crispy Pork Kare-Kare",
+          "category": "Mains",
+          "qty": 1,
+          "price": 245,
+          "cost": 120
+        },
+        {
+          "itemId": "m6",
+          "name": "Braised Beef Pares with Bone Marrow Glaze",
+          "category": "Soups & Bowls",
+          "qty": 1,
+          "price": 215,
+          "cost": 105
+        },
+        {
+          "itemId": "m14",
+          "name": "Batangas Tablea Tsokolate Iced Latte",
+          "category": "Drinks",
+          "qty": 1,
+          "price": 115,
+          "cost": 42
+        }
+      ],
+      "total": 575,
+      "totalCost": 267,
+      "browseDurationSec": 72,
+      "status": "Completed",
+      "rating": 5,
+      "createdAt": "2026-11-21T11:55:00+08:00"
+    },
+    {
+      "id": "ORD-1014",
+      "customerName": "Denise Aquino",
+      "orderType": "Dine-In",
+      "tableNumber": "3",
+      "source": "Walk-In POS",
+      "recordedBy": "Justin",
+      "items": [
+        {
+          "itemId": "m4",
+          "name": "Beef Short Rib Kaldereta with Smoked Cheese",
+          "category": "Mains",
+          "qty": 2,
+          "price": 255,
+          "cost": 130
+        },
+        {
+          "itemId": "m11",
+          "name": "Crispy Beef Lumpiang Shanghai",
+          "category": "Snacks & Desserts",
+          "qty": 1,
+          "price": 165,
+          "cost": 75
+        },
+        {
+          "itemId": "m15",
+          "name": "Honey Calamansi Pandan Cooler",
+          "category": "Drinks",
+          "qty": 2,
+          "price": 85,
+          "cost": 28
+        }
+      ],
+      "total": 845,
+      "totalCost": 391,
+      "browseDurationSec": null,
+      "status": "Ready",
+      "rating": null,
+      "createdAt": "2026-11-21T12:45:00+08:00"
+    },
+    {
+      "id": "ORD-1015",
+      "customerName": "Andrea Lim",
+      "orderType": "Dine-In",
+      "tableNumber": "5",
+      "source": "Online",
+      "recordedBy": "Online",
+      "items": [
+        {
+          "itemId": "m3",
+          "name": "Glazed Pork Belly Adobo with Garlic Confit",
+          "category": "Mains",
+          "qty": 2,
+          "price": 185,
+          "cost": 88
+        },
+        {
+          "itemId": "m7",
+          "name": "Meatball Soup in Creamy Wild Mushroom Broth",
+          "category": "Soups & Bowls",
+          "qty": 1,
+          "price": 175,
+          "cost": 82
+        },
+        {
+          "itemId": "m13",
+          "name": "Chocnut Halo-Halo with Salted Caramel",
+          "category": "Snacks & Desserts",
+          "qty": 1,
+          "price": 145,
+          "cost": 60
+        },
+        {
+          "itemId": "m15",
+          "name": "Honey Calamansi Pandan Cooler",
+          "category": "Drinks",
+          "qty": 2,
+          "price": 85,
+          "cost": 28
+        }
+      ],
+      "total": 860,
+      "totalCost": 374,
+      "browseDurationSec": 248,
+      "status": "Preparing",
+      "rating": null,
+      "createdAt": "2026-11-21T18:15:00+08:00"
+    }
+  ],
+  "tracking": {
+    "pageViews": [
+      {
+        "timestamp": "2026-11-17T11:10:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-17T11:20:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-17T12:02:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-17T12:40:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-17T15:18:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-17T16:45:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-17T18:15:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-17T18:35:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-17T19:50:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-18T11:15:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-18T11:55:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-18T12:18:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-18T13:05:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-18T15:12:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-18T16:22:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-18T18:45:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-18T19:02:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-18T20:10:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-19T11:05:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-19T11:40:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-19T12:10:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-19T12:50:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-19T15:40:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-19T16:08:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-19T17:30:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-19T18:55:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-20T11:30:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-20T12:10:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-20T12:16:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-20T13:12:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-20T15:25:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-20T16:40:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-20T18:30:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-20T19:18:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-20T20:05:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T11:12:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T11:48:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T12:05:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T12:30:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T13:15:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T15:20:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T16:50:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T18:05:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T18:45:00+08:00"
+      },
+      {
+        "timestamp": "2026-11-21T19:30:00+08:00"
+      }
+    ],
+    "menuClicks": [
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-17T11:22:00+08:00"
+      },
+      {
+        "itemId": "m15",
+        "itemName": "Honey Calamansi Pandan Cooler",
+        "category": "Drinks",
+        "timestamp": "2026-11-17T11:23:00+08:00"
+      },
+      {
+        "itemId": "m5",
+        "itemName": "Crispy Pork Binagoongan with Green Mango Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-17T12:04:00+08:00"
+      },
+      {
+        "itemId": "m6",
+        "itemName": "Braised Beef Pares with Bone Marrow Glaze",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-17T12:41:00+08:00"
+      },
+      {
+        "itemId": "m13",
+        "itemName": "Chocnut Halo-Halo with Salted Caramel",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-17T15:20:00+08:00"
+      },
+      {
+        "itemId": "m14",
+        "itemName": "Batangas Tablea Tsokolate Iced Latte",
+        "category": "Drinks",
+        "timestamp": "2026-11-17T15:21:00+08:00"
+      },
+      {
+        "itemId": "m9",
+        "itemName": "Batangas Bone Marrow Bulalo",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-17T18:36:00+08:00"
+      },
+      {
+        "itemId": "m3",
+        "itemName": "Glazed Pork Belly Adobo with Garlic Confit",
+        "category": "Mains",
+        "timestamp": "2026-11-17T18:37:00+08:00"
+      },
+      {
+        "itemId": "m14",
+        "itemName": "Batangas Tablea Tsokolate Iced Latte",
+        "category": "Drinks",
+        "timestamp": "2026-11-17T18:38:00+08:00"
+      },
+      {
+        "itemId": "m12",
+        "itemName": "Tinapa & Kesong Puti Croquettes",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-17T19:52:00+08:00"
+      },
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-17T19:54:00+08:00"
+      },
+      {
+        "itemId": "m5",
+        "itemName": "Crispy Pork Binagoongan with Green Mango Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-18T11:18:00+08:00"
+      },
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-18T12:01:00+08:00"
+      },
+      {
+        "itemId": "m2",
+        "itemName": "Tortang Talong with Tapa Baka & Itlog Maalat Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-18T12:02:00+08:00"
+      },
+      {
+        "itemId": "m13",
+        "itemName": "Chocnut Halo-Halo with Salted Caramel",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-18T12:03:00+08:00"
+      },
+      {
+        "itemId": "m6",
+        "itemName": "Braised Beef Pares with Bone Marrow Glaze",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-18T12:20:00+08:00"
+      },
+      {
+        "itemId": "m10",
+        "itemName": "Special Crispy Chicharon Goto",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-18T15:14:00+08:00"
+      },
+      {
+        "itemId": "m12",
+        "itemName": "Tinapa & Kesong Puti Croquettes",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-18T16:25:00+08:00"
+      },
+      {
+        "itemId": "m5",
+        "itemName": "Crispy Pork Binagoongan with Green Mango Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-18T18:48:00+08:00"
+      },
+      {
+        "itemId": "m4",
+        "itemName": "Beef Short Rib Kaldereta with Smoked Cheese",
+        "category": "Mains",
+        "timestamp": "2026-11-18T19:05:00+08:00"
+      },
+      {
+        "itemId": "m8",
+        "itemName": "Beef Ribs Sinigang sa Sampalok & Watermelon",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-18T19:06:00+08:00"
+      },
+      {
+        "itemId": "m15",
+        "itemName": "Honey Calamansi Pandan Cooler",
+        "category": "Drinks",
+        "timestamp": "2026-11-18T19:08:00+08:00"
+      },
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-18T20:12:00+08:00"
+      },
+      {
+        "itemId": "m5",
+        "itemName": "Crispy Pork Binagoongan with Green Mango Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-19T11:45:00+08:00"
+      },
+      {
+        "itemId": "m15",
+        "itemName": "Honey Calamansi Pandan Cooler",
+        "category": "Drinks",
+        "timestamp": "2026-11-19T11:46:00+08:00"
+      },
+      {
+        "itemId": "m6",
+        "itemName": "Braised Beef Pares with Bone Marrow Glaze",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-19T12:12:00+08:00"
+      },
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-19T12:14:00+08:00"
+      },
+      {
+        "itemId": "m9",
+        "itemName": "Batangas Bone Marrow Bulalo",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-19T12:52:00+08:00"
+      },
+      {
+        "itemId": "m13",
+        "itemName": "Chocnut Halo-Halo with Salted Caramel",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-19T15:43:00+08:00"
+      },
+      {
+        "itemId": "m7",
+        "itemName": "Meatball Soup in Creamy Wild Mushroom Broth",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-19T16:10:00+08:00"
+      },
+      {
+        "itemId": "m11",
+        "itemName": "Crispy Beef Lumpiang Shanghai",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-19T16:12:00+08:00"
+      },
+      {
+        "itemId": "m14",
+        "itemName": "Batangas Tablea Tsokolate Iced Latte",
+        "category": "Drinks",
+        "timestamp": "2026-11-19T16:13:00+08:00"
+      },
+      {
+        "itemId": "m5",
+        "itemName": "Crispy Pork Binagoongan with Green Mango Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-19T17:35:00+08:00"
+      },
+      {
+        "itemId": "m12",
+        "itemName": "Tinapa & Kesong Puti Croquettes",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-19T18:58:00+08:00"
+      },
+      {
+        "itemId": "m3",
+        "itemName": "Glazed Pork Belly Adobo with Garlic Confit",
+        "category": "Mains",
+        "timestamp": "2026-11-19T18:59:00+08:00"
+      },
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-20T11:33:00+08:00"
+      },
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-20T12:17:00+08:00"
+      },
+      {
+        "itemId": "m8",
+        "itemName": "Beef Ribs Sinigang sa Sampalok & Watermelon",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-20T12:18:00+08:00"
+      },
+      {
+        "itemId": "m13",
+        "itemName": "Chocnut Halo-Halo with Salted Caramel",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-20T12:19:00+08:00"
+      },
+      {
+        "itemId": "m6",
+        "itemName": "Braised Beef Pares with Bone Marrow Glaze",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-20T13:14:00+08:00"
+      },
+      {
+        "itemId": "m2",
+        "itemName": "Tortang Talong with Tapa Baka & Itlog Maalat Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-20T15:27:00+08:00"
+      },
+      {
+        "itemId": "m14",
+        "itemName": "Batangas Tablea Tsokolate Iced Latte",
+        "category": "Drinks",
+        "timestamp": "2026-11-20T15:29:00+08:00"
+      },
+      {
+        "itemId": "m10",
+        "itemName": "Special Crispy Chicharon Goto",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-20T16:43:00+08:00"
+      },
+      {
+        "itemId": "m5",
+        "itemName": "Crispy Pork Binagoongan with Green Mango Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-20T18:33:00+08:00"
+      },
+      {
+        "itemId": "m9",
+        "itemName": "Batangas Bone Marrow Bulalo",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-20T19:20:00+08:00"
+      },
+      {
+        "itemId": "m5",
+        "itemName": "Crispy Pork Binagoongan with Green Mango Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-20T19:22:00+08:00"
+      },
+      {
+        "itemId": "m14",
+        "itemName": "Batangas Tablea Tsokolate Iced Latte",
+        "category": "Drinks",
+        "timestamp": "2026-11-20T19:23:00+08:00"
+      },
+      {
+        "itemId": "m4",
+        "itemName": "Beef Short Rib Kaldereta with Smoked Cheese",
+        "category": "Mains",
+        "timestamp": "2026-11-20T20:07:00+08:00"
+      },
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-21T11:15:00+08:00"
+      },
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-21T11:51:00+08:00"
+      },
+      {
+        "itemId": "m6",
+        "itemName": "Braised Beef Pares with Bone Marrow Glaze",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-21T11:52:00+08:00"
+      },
+      {
+        "itemId": "m14",
+        "itemName": "Batangas Tablea Tsokolate Iced Latte",
+        "category": "Drinks",
+        "timestamp": "2026-11-21T11:53:00+08:00"
+      },
+      {
+        "itemId": "m15",
+        "itemName": "Honey Calamansi Pandan Cooler",
+        "category": "Drinks",
+        "timestamp": "2026-11-21T12:08:00+08:00"
+      },
+      {
+        "itemId": "m4",
+        "itemName": "Beef Short Rib Kaldereta with Smoked Cheese",
+        "category": "Mains",
+        "timestamp": "2026-11-21T12:34:00+08:00"
+      },
+      {
+        "itemId": "m11",
+        "itemName": "Crispy Beef Lumpiang Shanghai",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-21T12:36:00+08:00"
+      },
+      {
+        "itemId": "m12",
+        "itemName": "Tinapa & Kesong Puti Croquettes",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-21T13:18:00+08:00"
+      },
+      {
+        "itemId": "m13",
+        "itemName": "Chocnut Halo-Halo with Salted Caramel",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-21T15:23:00+08:00"
+      },
+      {
+        "itemId": "m5",
+        "itemName": "Crispy Pork Binagoongan with Green Mango Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-21T16:53:00+08:00"
+      },
+      {
+        "itemId": "m3",
+        "itemName": "Glazed Pork Belly Adobo with Garlic Confit",
+        "category": "Mains",
+        "timestamp": "2026-11-21T18:08:00+08:00"
+      },
+      {
+        "itemId": "m7",
+        "itemName": "Meatball Soup in Creamy Wild Mushroom Broth",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-21T18:10:00+08:00"
+      },
+      {
+        "itemId": "m13",
+        "itemName": "Chocnut Halo-Halo with Salted Caramel",
+        "category": "Snacks & Desserts",
+        "timestamp": "2026-11-21T18:12:00+08:00"
+      },
+      {
+        "itemId": "m15",
+        "itemName": "Honey Calamansi Pandan Cooler",
+        "category": "Drinks",
+        "timestamp": "2026-11-21T18:13:00+08:00"
+      },
+      {
+        "itemId": "m9",
+        "itemName": "Batangas Bone Marrow Bulalo",
+        "category": "Soups & Bowls",
+        "timestamp": "2026-11-21T18:48:00+08:00"
+      },
+      {
+        "itemId": "m2",
+        "itemName": "Tortang Talong with Tapa Baka & Itlog Maalat Salsa",
+        "category": "Mains",
+        "timestamp": "2026-11-21T19:33:00+08:00"
+      },
+      {
+        "itemId": "m1",
+        "itemName": "Crispy Pork Kare-Kare",
+        "category": "Mains",
+        "timestamp": "2026-11-21T19:35:00+08:00"
+      }
+    ]
+  }
+}

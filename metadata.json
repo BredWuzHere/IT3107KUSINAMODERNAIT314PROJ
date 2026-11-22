@@ -1,0 +1,6 @@
+{
+  "name": "Kusina Moderna",
+  "description": "Web-Based Food Order Recording System for Small Food Businesses — Elevated Lutong Bahay.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

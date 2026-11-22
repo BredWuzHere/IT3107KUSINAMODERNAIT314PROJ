@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Kusina Moderna — Elevated Lutong Bahay</title>
+  <meta name="description" content="Web-Based Food Order Recording System for Kusina Moderna — Elevated Lutong Bahay.">
+  <meta property="og:title" content="Kusina Moderna — Elevated Lutong Bahay">
+  <meta property="og:description" content="Web-Based Food Order Recording System for Kusina Moderna — Elevated Lutong Bahay.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="./style.css">
+  <!-- Chart.js v4 CDN for Admin Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Offline / Static Backend Guard Banner -->
+  <div id="backendBanner" class="backend-banner hidden" role="alert">
+    <div class="backend-banner-inner">
+      <p id="backendBannerMsg">Backend server is unreachable. Run <code>npm start</code> locally or deploy via Render.com to enable ordering and analytics.</p>
+      <button type="button" class="btn btn-ghost btn-sm" id="dismissBannerBtn" aria-label="Dismiss notice">Dismiss</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       PUBLIC WEBSITE VIEW (Default Landing — No Login Required)
+       ====================================================================== -->
+  <div id="publicView" class="app-view">
+    <header class="top-nav">
+      <div class="nav-inner">
+        <a href="#hero" class="brand-wordmark" data-action="scroll-top">Kusina Moderna</a>
+
+        <nav class="nav-links" aria-label="Primary Navigation">
+          <a href="#menuSection" class="nav-link">Menu</a>
+          <a href="#trackSection" class="nav-link">Track Order</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button type="button" id="openCartBtn" class="btn btn-subtle nav-cart-btn" aria-label="Open your order">
+            <span class="nav-cart-label">Order</span>
+            <span id="navCartCount" class="count-pill tabular">0</span>
+          </button>
+          <button type="button" id="openPortalOrLoginBtn" class="btn btn-primary nav-login-btn">
+            Staff / Admin Login
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Minimal Hero Section -->
+      <section id="hero" class="hero">
+        <div class="container hero-inner">
+          <p class="eyebrow">Elevated Lutong Bahay · Home-Cooked Classics with a Twist</p>
+          <h1 class="hero-title">Heritage Filipino flavors, crafted for today’s table.</h1>
+          <p class="hero-subtitle">
+            Slow-simmered home-cooked classics refined with modern technique. Place dine-in or take-out orders seamlessly and follow every step from our kitchen to your table.
+          </p>
+          <div class="hero-cta-row">
+            <a href="#menuSection" class="btn btn-primary btn-lg">Explore the Menu</a>
+            <a href="#trackSection" class="btn btn-outline btn-lg">Track an Order</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Public Menu & Sticky Order Workspace -->
+      <section id="menuSection" class="section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">The Menu</h2>
+              <p class="section-subtitle">Select any dish to inspect its full description or add directly to your order.</p>
+            </div>
+            <div class="menu-search-wrap">
+              <label for="publicMenuSearch" class="sr-only">Search dishes</label>
+              <input type="search" id="publicMenuSearch" class="input" placeholder="Search kare-kare, bulalo, drinks...">
+            </div>
+          </div>
+
+          <!-- Horizontal Scrollable Category Filter Pills -->
+          <div id="publicCategoryBar" class="pill-rail" role="tablist" aria-label="Menu categories">
+            <button type="button" class="pill-tab active" data-action="public-category" data-category="All" role="tab" aria-selected="true">All</button>
+            <button type="button" class="pill-tab" data-action="public-category" data-category="Mains" role="tab" aria-selected="false">Mains</button>
+            <button type="button" class="pill-tab" data-action="public-category" data-category="Soups & Bowls" role="tab" aria-selected="false">Soups &amp; Bowls</button>
+            <button type="button" class="pill-tab" data-action="public-category" data-category="Snacks & Desserts" role="tab" aria-selected="false">Snacks &amp; Desserts</button>
+            <button type="button" class="pill-tab" data-action="public-category" data-category="Drinks" role="tab" aria-selected="false">Drinks</button>
+          </div>
+
+          <div class="menu-layout">
+            <!-- Left: Dish Grid -->
+            <div class="menu-section">
+              <div id="publicMenuGrid" class="menu-grid" aria-live="polite"></div>
+            </div>
+
+            <!-- Right: Sticky Cart Rail (Desktop >= 1024px) / Slide-Over Drawer (< 1024px) -->
+            <div id="cartDrawerBackdrop" class="drawer-backdrop hidden" aria-hidden="true"></div>
+            <aside id="publicCartPanel" class="cart-panel card" aria-label="Your Order">
+              <div class="cart-header">
+                <div>
+                  <h3 class="card-title">Your Order</h3>
+                  <p id="cartItemSummary" class="muted-text tabular">0 items</p>
+                </div>
+                <button type="button" id="closeCartDrawerBtn" class="icon-btn mobile-only-close" aria-label="Close order drawer">&times;</button>
+              </div>
+
+              <div id="publicCartItems" class="cart-items"></div>
+
+              <form id="publicCheckoutForm" class="cart-checkout-form">
+                <div class="form-group">
+                  <label for="custNameInput" class="form-label">Customer Name <span class="req">*</span></label>
+                  <input type="text" id="custNameInput" class="input" placeholder="e.g., Maria Clara" required maxlength="80">
+                </div>
+
+                <div class="form-group">
+                  <span class="form-label">Order Type</span>
+                  <div class="segmented-control" role="radiogroup" aria-label="Order Type">
+                    <button type="button" class="seg-btn active" data-action="public-order-type" data-value="Dine-In">Dine-In</button>
+                    <button type="button" class="seg-btn" data-action="public-order-type" data-value="Take-Out">Take-Out</button>
+                  </div>
+                </div>
+
+                <div class="form-group" id="publicTableGroup">
+                  <label for="custTableInput" class="form-label">Table Number (Optional)</label>
+                  <input type="text" id="custTableInput" class="input" placeholder="e.g., Table 4" maxlength="20">
+                </div>
+
+                <div class="cart-total-row">
+                  <span>Total</span>
+                  <strong id="publicCartTotal" class="tabular">₱0.00</strong>
+                </div>
+
+                <button type="submit" id="placeOrderBtn" class="btn btn-primary btn-block" disabled>
+                  Place Order
+                </button>
+              </form>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Track Order Section -->
+      <section id="trackSection" class="section section-alt">
+        <div class="container track-container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Track Your Order</h2>
+              <p class="section-subtitle">Enter your Order ID to check live kitchen progress and rate your meal once completed.</p>
+            </div>
+          </div>
+
+          <div class="card track-card">
+            <form id="trackOrderForm" class="track-search-row">
+              <label for="trackOrderIdInput" class="sr-only">Order ID</label>
+              <input type="text" id="trackOrderIdInput" class="input" placeholder="Enter Order ID (e.g., ORD-1015)" required>
+              <button type="submit" id="trackOrderBtn" class="btn btn-primary">Track Order</button>
+            </form>
+
+            <!-- Recent Local Orders stored in localStorage -->
+            <div id="recentOrdersWrap" class="recent-orders-wrap hidden">
+              <span class="muted-label">Recent orders:</span>
+              <div id="recentOrdersChips" class="chip-row"></div>
+            </div>
+
+            <div id="trackResultContainer" class="track-result hidden"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p><strong>Kusina Moderna</strong> &middot; Elevated Lutong Bahay</p>
+        <p class="muted-text">IT 314 Web Systems &amp; Technologies &middot; BSIT 3107 &middot; Group 11 (Business Analytics Track)</p>
+      </div>
+    </footer>
+
+    <!-- Sticky Mobile/Tablet Bottom Cart Bar (< 1024px) -->
+    <div id="mobileCartBar" class="mobile-cart-bar hidden">
+      <button type="button" id="mobileCartBarBtn" class="btn btn-primary btn-block mobile-cart-trigger">
+        <span id="mobileCartBarText" class="tabular">Your Order (0) · ₱0.00</span>
+        <span class="mobile-cart-cta">Review Order</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       STAFF / ADMIN PORTAL VIEW (Role-Based Access)
+       ====================================================================== -->
+  <div id="portalView" class="app-view hidden">
+    <header class="top-nav portal-nav">
+      <div class="nav-inner portal-nav-inner">
+        <div class="portal-brand-wrap">
+          <span class="brand-wordmark">Kusina Moderna</span>
+          <span class="meta-sep" aria-hidden="true">/</span>
+          <span id="portalRoleTitle" class="portal-role-text">Portal</span>
+        </div>
+
+        <div class="portal-user-bar">
+          <span id="portalUserLabel" class="portal-user-label">Signed in</span>
+          <div class="portal-header-btns">
+            <button type="button" id="viewPublicSiteBtn" class="btn btn-subtle btn-sm">View Public Site</button>
+            <button type="button" id="logoutBtn" class="btn btn-outline btn-sm">Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="portal-shell">
+      <!-- Left Sidebar on Desktop (>= 1024px) / Horizontal Scrollable Pill Tabs (< 1024px) -->
+      <aside class="portal-sidebar" aria-label="Portal Navigation">
+        <nav id="portalNavList" class="portal-nav-list">
+          <button type="button" class="portal-tab admin-only" data-action="portal-tab" data-tab="analytics">
+            <span>Owner Analytics</span>
+          </button>
+          <button type="button" class="portal-tab" data-action="portal-tab" data-tab="pos">
+            <span>Walk-In POS</span>
+          </button>
+          <button type="button" class="portal-tab" data-action="portal-tab" data-tab="orders">
+            <span>Order Queue</span>
+          </button>
+          <button type="button" class="portal-tab staff-only" data-action="portal-tab" data-tab="stock">
+            <span>Quick Stock Toggle</span>
+          </button>
+          <button type="button" class="portal-tab admin-only" data-action="portal-tab" data-tab="menu">
+            <span>Menu Management</span>
+          </button>
+          <button type="button" class="portal-tab admin-only" data-action="portal-tab" data-tab="accounts">
+            <span>Account Management</span>
+          </button>
+        </nav>
+      </aside>
+
+      <!-- Fluid Portal Main Workspace -->
+      <main class="portal-main">
+        <!-- TAB 1 (ADMIN ONLY): OWNER REVENUE & CUSTOMER BEHAVIOR ANALYTICS -->
+        <section id="tab-analytics" class="portal-panel hidden">
+          <div class="panel-header-row">
+            <div>
+              <h1 class="panel-title">Owner Analytics &amp; Behavior Insights</h1>
+              <p class="panel-subtitle">Live financial metrics, customer browsing telemetry, and product conversion intelligence.</p>
+            </div>
+            <div class="analytics-controls">
+              <div class="segmented-control" id="analyticsTimeframe" role="radiogroup" aria-label="Analytics Timeframe">
+                <button type="button" class="seg-btn active" data-action="analytics-range" data-range="all">All Time</button>
+                <button type="button" class="seg-btn" data-action="analytics-range" data-range="7d">Last 7 Days</button>
+                <button type="button" class="seg-btn" data-action="analytics-range" data-range="today">Today</button>
+              </div>
+              <button type="button" id="refreshAnalyticsBtn" class="btn btn-subtle btn-sm">Refresh</button>
+            </div>
+          </div>
+
+          <!-- Owner Export Bar -->
+          <div class="card export-bar">
+            <div class="export-bar-info">
+              <strong>Export &amp; Reporting</strong>
+              <span class="muted-text">Download Excel-ready CSV reports for the selected timeframe or print an executive summary.</span>
+            </div>
+            <div class="export-bar-actions">
+              <button type="button" id="exportTxCsvBtn" class="btn btn-outline btn-sm">Export Transactions (CSV)</button>
+              <button type="button" id="exportMenuCsvBtn" class="btn btn-outline btn-sm">Export Menu Engagement &amp; Sales (CSV)</button>
+              <button type="button" id="printAnalyticsBtn" class="btn btn-primary btn-sm">Print Summary</button>
+            </div>
+          </div>
+
+          <!-- Daily Revenue Target Tracker -->
+          <div class="card target-card">
+            <div class="target-top">
+              <div>
+                <span class="kpi-label">Daily Revenue Target (Today’s Progress)</span>
+                <div class="target-numbers tabular">
+                  <strong id="targetTodayRev">₱0.00</strong>
+                  <span class="muted-text">of <span id="targetGoalDisplay">₱6,000.00</span></span>
+                  <span id="targetPercentBadge" class="status-pill pill-neutral">0%</span>
+                </div>
+              </div>
+              <form id="dailyTargetForm" class="target-edit-form">
+                <label for="dailyTargetInput" class="sr-only">Daily Revenue Target in PHP</label>
+                <input type="number" id="dailyTargetInput" class="input input-compact tabular" min="100" step="100" placeholder="6000" required>
+                <button type="submit" id="saveTargetBtn" class="btn btn-subtle btn-sm">Update Target</button>
+              </form>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <div id="targetProgressBar" class="progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Row 1: Financial KPIs -->
+          <div class="kpi-section-label">Financial Performance</div>
+          <div class="kpi-grid">
+            <article class="card kpi-card">
+              <span class="kpi-label">Gross Revenue</span>
+              <strong id="kpiRevenue" class="kpi-value tabular">₱0.00</strong>
+              <span id="kpiRevenueNote" class="kpi-foot">Excludes cancelled orders</span>
+            </article>
+            <article class="card kpi-card">
+              <span class="kpi-label">Est. Net Profit &amp; Margin</span>
+              <strong id="kpiProfit" class="kpi-value kpi-profit tabular">₱0.00</strong>
+              <span id="kpiMarginNote" class="kpi-foot tabular">0.0% gross margin</span>
+            </article>
+            <article class="card kpi-card">
+              <span class="kpi-label">Active &amp; Completed Orders</span>
+              <strong id="kpiOrders" class="kpi-value tabular">0</strong>
+              <span id="kpiCancelledNote" class="kpi-foot tabular">0 cancelled (₱0.00 lost)</span>
+            </article>
+            <article class="card kpi-card">
+              <span class="kpi-label">Customer Spend (Avg. Order)</span>
+              <strong id="kpiAov" class="kpi-value tabular">₱0.00</strong>
+              <span id="kpiHighestNote" class="kpi-foot tabular">Highest order: ₱0.00</span>
+            </article>
+          </div>
+
+          <!-- Row 2: Customer Behavior KPIs -->
+          <div class="kpi-section-label">Customer Behavior &amp; Experience</div>
+          <div class="kpi-grid">
+            <article class="card kpi-card">
+              <span class="kpi-label">Total Menu Page Views</span>
+              <strong id="kpiPageViews" class="kpi-value tabular">0</strong>
+              <span id="kpiConversionNote" class="kpi-foot tabular">0.0% visitor-to-order rate</span>
+            </article>
+            <article class="card kpi-card">
+              <span class="kpi-label">Total Menu Item Clicks</span>
+              <strong id="kpiMenuClicks" class="kpi-value tabular">0</strong>
+              <span id="kpiTopClickedNote" class="kpi-foot">Top clicked: —</span>
+            </article>
+            <article class="card kpi-card">
+              <span class="kpi-label">Avg. Menu Browse Time</span>
+              <strong id="kpiBrowseTime" class="kpi-value tabular">—</strong>
+              <span id="kpiBrowseRangeNote" class="kpi-foot tabular">Fastest: — · Longest: —</span>
+            </article>
+            <article class="card kpi-card">
+              <span class="kpi-label">Peak Hour &amp; Avg. Rating</span>
+              <strong id="kpiPeakHour" class="kpi-value tabular">—</strong>
+              <span id="kpiRatingNote" class="kpi-foot tabular">No ratings yet</span>
+            </article>
+          </div>
+
+          <!-- Automated Business Analytics Insights Panel -->
+          <div class="card insights-card">
+            <div class="card-header-inline">
+              <h2 class="card-title">Automated Owner Insights</h2>
+              <span class="muted-text">Computed live from sales &amp; customer telemetry</span>
+            </div>
+            <ol id="insightsList" class="insights-list"></ol>
+          </div>
+
+          <!-- 4 Interactive Responsive Chart.js Visualizations -->
+          <div class="charts-grid">
+            <article class="card chart-card">
+              <div class="chart-card-header">
+                <h3 class="card-title">Daily Revenue vs. Est. Profit</h3>
+                <span class="muted-text">PHP (₱) trend excluding cancelled orders</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="revenueChart"></canvas>
+              </div>
+            </article>
+
+            <article class="card chart-card">
+              <div class="chart-card-header">
+                <h3 class="card-title">Most Clicked vs. Most Ordered (Top 6)</h3>
+                <span class="muted-text">Menu interest vs. actual units sold</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="engagementChart"></canvas>
+              </div>
+            </article>
+
+            <article class="card chart-card">
+              <div class="chart-card-header">
+                <h3 class="card-title">Revenue Share by Category</h3>
+                <span class="muted-text">Distribution across menu sections</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="categoryChart"></canvas>
+              </div>
+            </article>
+
+            <article class="card chart-card">
+              <div class="chart-card-header">
+                <h3 class="card-title">Hourly Order Volume (Peak Hours)</h3>
+                <span class="muted-text">Order frequency by hour of day</span>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="hourlyChart"></canvas>
+              </div>
+            </article>
+          </div>
+
+          <!-- Table 1: Most Popular Item Each Day -->
+          <div class="card table-card">
+            <div class="card-header-inline">
+              <h2 class="card-title">Most Popular Item Each Day (Daily Best-Sellers)</h2>
+              <span class="muted-text">Sorted newest date first</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Most Popular Dish</th>
+                    <th class="num">Units Sold</th>
+                    <th class="num">Top Dish Revenue</th>
+                    <th class="num">Total Day Orders</th>
+                    <th class="num">Total Day Revenue</th>
+                  </tr>
+                </thead>
+                <tbody id="dailyBestSellersBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Table 2: Menu Clicks, Conversion & Profitability -->
+          <div class="card table-card">
+            <div class="card-header-inline">
+              <h2 class="card-title">Menu Clicks, Conversion &amp; Profitability</h2>
+              <span class="muted-text">Sorted highest to lowest gross revenue</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Dish Name</th>
+                    <th>Category</th>
+                    <th class="num">Menu Clicks</th>
+                    <th class="num">Units Sold</th>
+                    <th class="num">Click-to-Order %</th>
+                    <th class="num">Gross Revenue</th>
+                    <th class="num">Est. Profit</th>
+                    <th class="num">Margin %</th>
+                  </tr>
+                </thead>
+                <tbody id="menuProfitabilityBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Table 3: Customer Spend & Repeat Buyers -->
+          <div class="card table-card">
+            <div class="card-header-inline">
+              <h2 class="card-title">Customer Spend &amp; Repeat Buyers</h2>
+              <span class="muted-text">Grouped by customer name (non-cancelled orders)</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Customer</th>
+                    <th class="num">Orders Placed</th>
+                    <th class="num">Total Spent</th>
+                    <th class="num">Avg. Spend / Order</th>
+                    <th class="num">Avg. Browse Time</th>
+                    <th>Favorite Dish</th>
+                  </tr>
+                </thead>
+                <tbody id="customerSpendBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Table 4: Staff & Order Source Performance -->
+          <div class="card table-card">
+            <div class="card-header-inline">
+              <h2 class="card-title">Staff &amp; Order Source Performance</h2>
+              <span class="muted-text">Walk-In POS cashiers vs. Online self-orders</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Staff / Source</th>
+                    <th>Channel</th>
+                    <th class="num">Orders Handled</th>
+                    <th class="num">Gross Revenue</th>
+                  </tr>
+                </thead>
+                <tbody id="staffPerformanceBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2 (STAFF & ADMIN): WALK-IN POS -->
+        <section id="tab-pos" class="portal-panel hidden">
+          <div class="panel-header-row">
+            <div>
+              <h1 class="panel-title">Walk-In POS Counter</h1>
+              <p class="panel-subtitle">Record counter orders directly into the live kitchen queue.</p>
+            </div>
+          </div>
+
+          <div class="pos-layout">
+            <div class="pos-menu-col">
+              <div class="pos-toolbar">
+                <label for="posSearchInput" class="sr-only">Search POS menu</label>
+                <input type="search" id="posSearchInput" class="input" placeholder="Search dishes...">
+                <div id="posCategoryBar" class="pill-rail">
+                  <button type="button" class="pill-tab active" data-action="pos-category" data-category="All">All</button>
+                  <button type="button" class="pill-tab" data-action="pos-category" data-category="Mains">Mains</button>
+                  <button type="button" class="pill-tab" data-action="pos-category" data-category="Soups & Bowls">Soups &amp; Bowls</button>
+                  <button type="button" class="pill-tab" data-action="pos-category" data-category="Snacks & Desserts">Snacks &amp; Desserts</button>
+                  <button type="button" class="pill-tab" data-action="pos-category" data-category="Drinks">Drinks</button>
+                </div>
+              </div>
+              <div id="posMenuGrid" class="pos-menu-grid"></div>
+            </div>
+
+            <aside class="card pos-cart-card">
+              <div class="cart-header">
+                <div>
+                  <h2 class="card-title">Counter Ticket</h2>
+                  <p id="posCartCount" class="muted-text tabular">0 items</p>
+                </div>
+                <button type="button" id="clearPosCartBtn" class="btn btn-ghost btn-sm">Clear</button>
+              </div>
+
+              <div id="posCartItems" class="cart-items"></div>
+
+              <form id="posCheckoutForm" class="cart-checkout-form">
+                <div class="form-group">
+                  <label for="posCustomerName" class="form-label">Customer Name</label>
+                  <input type="text" id="posCustomerName" class="input" value="Walk-in" placeholder="Walk-in" maxlength="80">
+                </div>
+
+                <div class="form-group">
+                  <span class="form-label">Order Type</span>
+                  <div class="segmented-control" role="radiogroup" aria-label="POS Order Type">
+                    <button type="button" class="seg-btn active" data-action="pos-order-type" data-value="Dine-In">Dine-In</button>
+                    <button type="button" class="seg-btn" data-action="pos-order-type" data-value="Take-Out">Take-Out</button>
+                  </div>
+                </div>
+
+                <div class="form-group" id="posTableGroup">
+                  <label for="posTableInput" class="form-label">Table Number (Optional)</label>
+                  <input type="text" id="posTableInput" class="input" placeholder="e.g., 4" maxlength="20">
+                </div>
+
+                <div class="cart-total-row">
+                  <span>Total</span>
+                  <strong id="posCartTotal" class="tabular">₱0.00</strong>
+                </div>
+
+                <button type="submit" id="savePosOrderBtn" class="btn btn-primary btn-block" disabled>
+                  Save Walk-In Order
+                </button>
+              </form>
+            </aside>
+          </div>
+        </section>
+
+        <!-- TAB 3 (STAFF & ADMIN): LIVE ORDER QUEUE & HISTORY -->
+        <section id="tab-orders" class="portal-panel hidden">
+          <div class="panel-header-row">
+            <div>
+              <h1 class="panel-title">Live Order Queue &amp; History</h1>
+              <p class="panel-subtitle">Update preparation status in real time and print clean customer receipts.</p>
+            </div>
+            <button type="button" id="refreshOrdersBtn" class="btn btn-subtle btn-sm">Refresh Queue</button>
+          </div>
+
+          <div class="card filter-card">
+            <div class="filters-row">
+              <div class="filter-field">
+                <label for="orderSearchInput" class="form-label">Search Order ID or Customer</label>
+                <input type="search" id="orderSearchInput" class="input" placeholder="e.g., ORD-1015 or Maria...">
+              </div>
+              <div class="filter-field">
+                <label for="orderStatusFilter" class="form-label">Status</label>
+                <select id="orderStatusFilter" class="input">
+                  <option value="All">All Statuses</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Preparing">Preparing</option>
+                  <option value="Ready">Ready</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </div>
+              <div class="filter-field admin-only" id="orderSourceFilterWrap">
+                <label for="orderSourceFilter" class="form-label">Order Source</label>
+                <select id="orderSourceFilter" class="input">
+                  <option value="All">All Sources</option>
+                  <option value="Online">Online</option>
+                  <option value="Walk-In POS">Walk-In POS</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="card table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Date &amp; Time</th>
+                    <th>Customer</th>
+                    <th>Channel &amp; Type</th>
+                    <th>Items</th>
+                    <th class="num">Total</th>
+                    <th>Status</th>
+                    <th class="actions-col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="ordersTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4 (STAFF ONLY): QUICK STOCK TOGGLE -->
+        <section id="tab-stock" class="portal-panel hidden">
+          <div class="panel-header-row">
+            <div>
+              <h1 class="panel-title">Quick Stock Toggle</h1>
+              <p class="panel-subtitle">Instantly mark dishes Available or Out of Stock on the public menu.</p>
+            </div>
+            <div class="menu-search-wrap">
+              <label for="stockSearchInput" class="sr-only">Filter dishes</label>
+              <input type="search" id="stockSearchInput" class="input" placeholder="Search dish...">
+            </div>
+          </div>
+
+          <div class="card table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Dish</th>
+                    <th>Category</th>
+                    <th class="num">Price</th>
+                    <th>Availability</th>
+                    <th class="actions-col">Toggle Stock</th>
+                  </tr>
+                </thead>
+                <tbody id="staffStockTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 5 (ADMIN ONLY): MENU MANAGEMENT CRUD -->
+        <section id="tab-menu" class="portal-panel hidden">
+          <div class="panel-header-row">
+            <div>
+              <h1 class="panel-title">Menu Management</h1>
+              <p class="panel-subtitle">Add, update, price, toggle availability, or remove menu items.</p>
+            </div>
+            <button type="button" id="openAddDishBtn" class="btn btn-primary">+ Add New Dish</button>
+          </div>
+
+          <div class="card filter-card">
+            <div class="filters-row">
+              <div class="filter-field">
+                <label for="adminMenuSearch" class="form-label">Search Menu</label>
+                <input type="search" id="adminMenuSearch" class="input" placeholder="Search by dish name or category...">
+              </div>
+            </div>
+          </div>
+
+          <div class="card table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Dish</th>
+                    <th>Category</th>
+                    <th class="num">Price</th>
+                    <th class="num">Est. Cost</th>
+                    <th class="num">Margin</th>
+                    <th>Status</th>
+                    <th class="actions-col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminMenuTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 6 (ADMIN ONLY): ACCOUNT MANAGEMENT -->
+        <section id="tab-accounts" class="portal-panel hidden">
+          <div class="panel-header-row">
+            <div>
+              <h1 class="panel-title">Account Management</h1>
+              <p class="panel-subtitle">Create Staff or Admin accounts, update usernames, roles, and passwords.</p>
+            </div>
+          </div>
+
+          <div class="accounts-grid">
+            <!-- Add New Account Form -->
+            <div class="card">
+              <h2 class="card-title">Add New Account</h2>
+              <p class="muted-text form-helper-space">New staff or owner accounts can sign in immediately.</p>
+              <form id="addAccountForm" class="stack-form">
+                <div class="form-group">
+                  <label for="newAccUsername" class="form-label">Username <span class="req">*</span></label>
+                  <input type="text" id="newAccUsername" class="input" required minlength="3" maxlength="40" placeholder="e.g., CashierAna">
+                </div>
+                <div class="form-group">
+                  <label for="newAccPassword" class="form-label">Password <span class="req">*</span></label>
+                  <input type="password" id="newAccPassword" class="input" required minlength="4" maxlength="60" placeholder="Minimum 4 characters">
+                </div>
+                <div class="form-group">
+                  <label for="newAccRole" class="form-label">Role</label>
+                  <select id="newAccRole" class="input">
+                    <option value="staff">Staff (Cashier / POS &amp; Queue)</option>
+                    <option value="admin">Admin (Full Owner &amp; Analytics)</option>
+                  </select>
+                </div>
+                <button type="submit" id="createAccountBtn" class="btn btn-primary btn-block">Create Account</button>
+              </form>
+            </div>
+
+            <!-- Accounts Table -->
+            <div class="card table-card">
+              <div class="card-header-inline">
+                <h2 class="card-title">Registered Accounts</h2>
+                <span class="muted-text">Passwords are hashed and never displayed</span>
+              </div>
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Username</th>
+                      <th>Role</th>
+                      <th class="actions-col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="accountsTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODALS (Dish Detail, Order Confirmation, Login, Dish CRUD, Edit Account, Receipt, Confirm)
+       ====================================================================== -->
+
+  <!-- 1. Dish Detail Preview Modal -->
+  <div id="dishDetailModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="dishModalTitle">
+    <div class="modal-card modal-dish">
+      <button type="button" class="icon-btn modal-close" data-action="close-modal" aria-label="Close dish preview">&times;</button>
+      <div class="dish-modal-media">
+        <img id="dishModalImg" src="./images/default-food.svg" alt="Dish photo" referrerpolicy="no-referrer">
+      </div>
+      <div class="dish-modal-body">
+        <div class="dish-modal-meta">
+          <span id="dishModalCategory" class="category-label">Mains</span>
+          <span id="dishModalStatus" class="status-pill pill-success">Available</span>
+        </div>
+        <h2 id="dishModalTitle" class="modal-title">Dish Name</h2>
+        <p id="dishModalDesc" class="modal-desc"></p>
+        <div class="dish-modal-footer">
+          <strong id="dishModalPrice" class="dish-modal-price tabular">₱0.00</strong>
+          <button type="button" id="dishModalAddBtn" class="btn btn-primary">Add to Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Order Placed Confirmation Modal -->
+  <div id="orderConfirmModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="orderConfirmTitle">
+    <div class="modal-card modal-sm">
+      <button type="button" class="icon-btn modal-close" data-action="close-modal" aria-label="Close confirmation">&times;</button>
+      <div class="confirm-icon-circle" aria-hidden="true">&#10003;</div>
+      <h2 id="orderConfirmTitle" class="modal-title text-center">Order Received</h2>
+      <p class="modal-desc text-center">Your order has been sent directly to the Kusina Moderna kitchen.</p>
+      <div class="order-id-box">
+        <span class="muted-label">Order Reference ID</span>
+        <strong id="confirmOrderIdText" class="order-id-code tabular">ORD-1016</strong>
+      </div>
+      <div class="modal-actions-stack">
+        <button type="button" id="confirmTrackNowBtn" class="btn btn-primary btn-block">Track This Order</button>
+        <button type="button" class="btn btn-subtle btn-block" data-action="close-modal">Continue Browsing</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Unified Staff / Admin Login Modal -->
+  <div id="loginModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+    <div class="modal-card modal-sm">
+      <button type="button" class="icon-btn modal-close" data-action="close-modal" aria-label="Close login">&times;</button>
+      <p class="eyebrow login-eyebrow">Kusina Moderna</p>
+      <h2 id="loginModalTitle" class="modal-title">Staff &amp; Admin Sign In</h2>
+      <p class="modal-desc">Sign in to access Walk-In POS, Order Queue, or Owner Analytics.</p>
+      <form id="loginForm" class="stack-form">
+        <div class="form-group">
+          <label for="loginUsername" class="form-label">Username</label>
+          <input type="text" id="loginUsername" class="input" autocomplete="username" required placeholder="Enter username">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword" class="form-label">Password</label>
+          <input type="password" id="loginPassword" class="input" autocomplete="current-password" required placeholder="Enter password">
+        </div>
+        <p id="loginErrorMsg" class="form-error hidden" role="alert"></p>
+        <button type="submit" id="loginSubmitBtn" class="btn btn-primary btn-block">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Admin Add / Edit Menu Dish Modal -->
+  <div id="dishFormModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="dishFormModalTitle">
+    <div class="modal-card">
+      <button type="button" class="icon-btn modal-close" data-action="close-modal" aria-label="Close dish form">&times;</button>
+      <h2 id="dishFormModalTitle" class="modal-title">Add New Dish</h2>
+      <form id="dishCrudForm" class="stack-form">
+        <input type="hidden" id="dishFormId">
+        <div class="form-group">
+          <label for="dishFormName" class="form-label">Dish Name <span class="req">*</span></label>
+          <input type="text" id="dishFormName" class="input" required maxlength="100" placeholder="e.g., Crispy Pork Kare-Kare">
+        </div>
+        <div class="form-group">
+          <label for="dishFormDesc" class="form-label">Short Twist Description <span class="req">*</span></label>
+          <textarea id="dishFormDesc" class="input" rows="2" required maxlength="220" placeholder="Describe the elevated home-cooked twist..."></textarea>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="dishFormCategory" class="form-label">Category</label>
+            <select id="dishFormCategory" class="input">
+              <option value="Mains">Mains</option>
+              <option value="Soups & Bowls">Soups &amp; Bowls</option>
+              <option value="Snacks & Desserts">Snacks &amp; Desserts</option>
+              <option value="Drinks">Drinks</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dishFormAvailable" class="form-label">Availability</label>
+            <select id="dishFormAvailable" class="input">
+              <option value="true">Available</option>
+              <option value="false">Out of Stock</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="dishFormPrice" class="form-label">Selling Price (₱) <span class="req">*</span></label>
+            <input type="number" id="dishFormPrice" class="input tabular" min="1" step="0.01" required placeholder="245">
+          </div>
+          <div class="form-group">
+            <label for="dishFormCost" class="form-label">Est. Food Cost (₱) <span class="req">*</span></label>
+            <input type="number" id="dishFormCost" class="input tabular" min="0" step="0.01" required placeholder="120">
+          </div>
+        </div>
+        <div id="dishMarginPreview" class="margin-preview tabular">
+          Estimated Profit: ₱0.00 (0.0% margin)
+        </div>
+        <div class="form-group">
+          <label for="dishPhotoFileInput" class="form-label">Dish Photo</label>
+          <div id="dishPhotoDropzone" class="dish-uploader">
+            <div class="dish-uploader-preview">
+              <img id="dishFormPreviewImg" src="./images/default-food.svg" alt="Dish photo preview" data-fallback-img="true">
+            </div>
+            <div class="dish-uploader-body">
+              <input type="file" id="dishPhotoFileInput" class="sr-only" accept="image/jpeg,image/png,image/webp,image/gif">
+              <input type="hidden" id="dishFormImage" value="./images/default-food.svg">
+              <div class="dish-uploader-actions">
+                <button type="button" id="dishPhotoUploadBtn" class="btn btn-outline btn-sm">Upload / Change Photo</button>
+                <button type="button" id="dishPhotoRemoveBtn" class="btn btn-danger-outline btn-sm">Remove Photo</button>
+              </div>
+              <p class="dish-uploader-path">
+                Photo file: <code id="dishFormImagePathText">./images/default-food.svg</code>
+              </p>
+              <p id="dishPhotoStatusHint" class="dish-uploader-hint">
+                Drag &amp; drop or choose JPG, PNG, WebP, or GIF (max 8MB). Photos auto-optimize on save.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions-row">
+          <button type="button" class="btn btn-subtle" data-action="close-modal">Cancel</button>
+          <button type="submit" id="saveDishBtn" class="btn btn-primary">Save Dish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. Admin Edit Account Modal -->
+  <div id="editAccountModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="editAccountTitle">
+    <div class="modal-card modal-sm">
+      <button type="button" class="icon-btn modal-close" data-action="close-modal" aria-label="Close edit account">&times;</button>
+      <h2 id="editAccountTitle" class="modal-title">Edit Account</h2>
+      <form id="editAccountForm" class="stack-form">
+        <input type="hidden" id="editAccId">
+        <div class="form-group">
+          <label for="editAccUsername" class="form-label">Username <span class="req">*</span></label>
+          <input type="text" id="editAccUsername" class="input" required minlength="3" maxlength="40">
+        </div>
+        <div class="form-group">
+          <label for="editAccRole" class="form-label">Role</label>
+          <select id="editAccRole" class="input">
+            <option value="staff">Staff</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editAccPassword" class="form-label">New Password (Optional)</label>
+          <input type="password" id="editAccPassword" class="input" maxlength="60" placeholder="Leave blank to keep existing">
+        </div>
+        <div class="modal-actions-row">
+          <button type="button" class="btn btn-subtle" data-action="close-modal">Cancel</button>
+          <button type="submit" id="saveEditAccBtn" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 6. Printable Receipt Modal -->
+  <div id="receiptModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="receiptModalTitle">
+    <div class="modal-card modal-receipt">
+      <button type="button" class="icon-btn modal-close no-print" data-action="close-modal" aria-label="Close receipt">&times;</button>
+      <div id="receiptPrintArea" class="receipt-sheet">
+        <div class="receipt-brand">
+          <h2 id="receiptModalTitle">Kusina Moderna</h2>
+          <p>Elevated Lutong Bahay</p>
+          <p class="receipt-sub">Official Order Slip</p>
+        </div>
+        <div id="receiptBody" class="receipt-body"></div>
+        <div class="receipt-footer">
+          <p>Thank you for dining with Kusina Moderna.</p>
+          <p>Track your order online using your Order ID.</p>
+        </div>
+      </div>
+      <div class="modal-actions-row no-print receipt-actions-row">
+        <button type="button" class="btn btn-subtle" data-action="close-modal">Close</button>
+        <button type="button" id="printReceiptBtn" class="btn btn-primary">Print Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Generic Confirmation Modal (Delete Order / Dish / Account) -->
+  <div id="confirmActionModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="confirmActionTitle">
+    <div class="modal-card modal-sm">
+      <button type="button" class="icon-btn modal-close" data-action="close-modal" aria-label="Close confirmation">&times;</button>
+      <h2 id="confirmActionTitle" class="modal-title">Confirm Action</h2>
+      <p id="confirmActionMessage" class="modal-desc"></p>
+      <div class="modal-actions-row">
+        <button type="button" class="btn btn-subtle" data-action="close-modal">Cancel</button>
+        <button type="button" id="confirmActionProceedBtn" class="btn btn-danger">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
