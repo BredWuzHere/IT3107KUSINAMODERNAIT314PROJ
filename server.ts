@@ -1,6 +1,6 @@
 /**
- * Kusina Moderna — Express Backend Server
- * IT 314 Web Systems & Technologies (BSIT 3107, Group 11 — Business Analytics Track)
+ * Kusina Moderna — Express Backend Server BREDWUZHEREBLEHHHHHH
+ * IT 314 Web Systems & Technologies (BSIT 3107, Group 11 Business Analytics Track)
  *
  * Uses Express + built-in Node.js modules (fs, path, crypto, url) with local JSON storage.
  */
@@ -118,9 +118,9 @@ app.use('/images', express.static(IMAGES_DIR));
 // Serve static frontend files from /public
 app.use(express.static(PUBLIC_DIR));
 
-/* ============================================================================
+/* 
  * PASSWORD HASHING & SIGNED SESSION TOKEN HELPERS
- * ========================================================================== */
+ *  */
 
 function hashPassword(plain: string): string {
   const salt = crypto.randomBytes(16).toString('hex');
@@ -202,9 +202,9 @@ function extractBearerToken(req: Request): string | null {
   return match ? match[1].trim() : null;
 }
 
-/* ============================================================================
+/* 
  * DATABASE HELPERS (Crash-Resilient Local JSON Storage)
- * ========================================================================== */
+ *  */
 
 function getDefaultDB(): DatabaseSchema {
   return {
@@ -394,9 +394,9 @@ function generateOrderId(orders: OrderRecord[]): string {
   return `ORD-${maxNum + 1}`;
 }
 
-/* ============================================================================
+/* 
  * LIVE ROLE-BASED AUTHENTICATION MIDDLEWARE
- * ========================================================================== */
+ *  */
 
 function requireAuth(allowedRoles?: Role[]) {
   return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
