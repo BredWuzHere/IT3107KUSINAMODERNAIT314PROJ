@@ -24,6 +24,7 @@ A lightweight, monochrome Apple-minimalist full-stack web application built with
 Requires **Node.js v22+**.
 
 ```bash
+npm install --legacy-peer-deps(if npm install failed use legacy cuh)
 npm install
 npm start
 ```
