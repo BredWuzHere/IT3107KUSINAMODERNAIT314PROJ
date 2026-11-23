@@ -1,14 +1,13 @@
 /**
- * Kusina Moderna — Frontend Application Logic (Vanilla ES6+ JavaScript)
- * IT 314 Web Systems & Technologies — BSIT 3107, Group 11 (Business Analytics Track)
+ * Kusina Moderna Frontend Application Logic (Vanilla ES6+ JavaScript)
  */
 
 (() => {
   'use strict';
 
-  /* ==========================================================================
+  /* 
    * 1. APPLICATION STATE
-   * ======================================================================== */
+   *  */
 
   const RECENT_ORDERS_KEY = 'km_recent_orders';
   const PAGE_VIEW_FLAG = 'km_session_pageview_logged';
@@ -62,7 +61,7 @@
     // Pending confirmation modal handler
     pendingConfirmAction: null,
 
-    // Draft dish photo upload state (uploaded ONLY on Save Dish to prevent orphan files)
+    // Draft dish photo upload state (uploaded ONLY on Save Dish to prevent orphan files cuh)
     dishPhotoDraft: {
       dataUrl: null,
       filename: '',
@@ -71,9 +70,9 @@
     }
   };
 
-  /* ==========================================================================
-   * 2. FORMATTING, ESCAPING & LOCAL TIMEZONE HELPERS
-   * ======================================================================== */
+  /* 
+   * FORMATTING, ESCAPING & LOCAL TIMEZONE HELPERS
+   *  */
 
   function escapeHTML(value) {
     return String(value ?? '')
@@ -185,9 +184,9 @@
     banner.classList.remove('hidden');
   }
 
-  /* ==========================================================================
-   * 3. SAFE API CLIENT (With Static/Offline Backend Guard)
-   * ======================================================================== */
+  /* 
+   * 3. SAFE API CLIENT (With Static/Offline Backend Guard sa Stackoverflow kinuha - Bred)
+   *  */
 
   async function apiFetch(url, options = {}) {
     const headers = { ...(options.headers || {}) };
@@ -235,9 +234,9 @@
     showToast('Session expired. Please sign in again.', 'error');
   }
 
-  /* ==========================================================================
-   * 4. SILENT CUSTOMER BEHAVIOR TELEMETRY (Fire-and-Forget)
-   * ======================================================================== */
+  /* 
+   * SILENT CUSTOMER BEHAVIOR TELEMETRY (Fire-and-Forget)
+   *  */
 
   function trackEvent(payload) {
     // Never log Staff/Admin portal sessions as customer engagement
@@ -260,9 +259,9 @@
     trackEvent({ type: 'page_view' });
   }
 
-  /* ==========================================================================
+  /* 
    * 5. MODAL, DRAWER & SCROLL-LOCK MANAGEMENT
-   * ======================================================================== */
+   *  */
 
   function syncScrollLock() {
     const anyModalOpen = Boolean(document.querySelector('.modal-backdrop:not(.hidden)'));
@@ -307,9 +306,9 @@
     openModal('confirmActionModal');
   }
 
-  /* ==========================================================================
+  /* 
    * 6. PUBLIC WEBSITE: MENU, DISH PREVIEW, CART & ORDER TRACKING
-   * ======================================================================== */
+   *  */
 
   async function loadMenu() {
     const items = await apiFetch('./api/menu');
@@ -671,9 +670,9 @@
     }
   }
 
-  /* ==========================================================================
+  /* 
    * 7. AUTHENTICATION & ROLE-BASED PORTAL ROUTING
-   * ======================================================================== */
+   *  */
 
   function updatePublicNavAuthButton() {
     const btn = document.getElementById('openPortalOrLoginBtn');
@@ -807,9 +806,9 @@
     }
   }
 
-  /* ==========================================================================
+  /* 
    * 8. ADMIN OWNER ANALYTICS DASHBOARD (8 KPIs, 4 Charts, 4 Tables, Insights, CSV)
-   * ======================================================================== */
+   *  */
 
   async function loadAdminAnalytics() {
     if (!state.user || state.user.role !== 'admin') return;
