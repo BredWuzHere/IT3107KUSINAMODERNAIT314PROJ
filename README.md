@@ -9,7 +9,7 @@
 
 ## Project Overview
 
-A lightweight, monochrome Apple-minimalist full-stack web application built with **semantic HTML5, plain CSS3, Vanilla JavaScript (ES6+), Node.js, Express.js, and Chart.js v4**, backed by a local JSON datastore (`data/database.json`).
+A lightweight, monochrome minimalist full stack web application built with **semantic HTML5, plain CSS3, Vanilla JavaScript (ES6+), Node.js, Express.js, and Chart.js v4**, backed by a local JSON datastore (`data/database.json`).
 
 ### Core Features
 - **Public Customer Website:** Browse the 15 dish *Elevated Lutong Bahay* menu, inspect dish details, place Online Dine In or Take Out orders, track live order status, and submit 1 to 5 star ratings on completed orders.
