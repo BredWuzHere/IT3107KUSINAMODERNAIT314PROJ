@@ -1730,9 +1730,9 @@
     }
   }
 
-  /* ==========================================================================
+  /* 
    * 10. LIVE ORDER QUEUE & RECEIPT MODAL
-   * ======================================================================== */
+   *  */
 
   async function loadPortalOrders() {
     const orders = await apiFetch('./api/orders');
@@ -1849,9 +1849,9 @@
     }, 300);
   }
 
-  /* ==========================================================================
+  /* 
    * 11. STAFF QUICK STOCK TOGGLE & ADMIN MENU CRUD
-   * ======================================================================== */
+   *  */
 
   function renderStaffStockTable() {
     const tbody = document.getElementById('staffStockTableBody');
